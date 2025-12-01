@@ -1,0 +1,30 @@
+# Core AI / CrewAI
+crewai==0.1.10
+pydantic==2.6.2
+
+# NLP / Embeddings
+nltk==3.8.1
+langchain-text-splitters==0.0.8
+langchain-community==0.0.14
+transformers==4.35.0
+sentence-transformers==2.2.2
+
+# PDF and Audio Processing
+PyMuPDF==1.23.6           # fitz module
+whisper==20230314          # OpenAI Whisper for transcription
+
+# Web / API
+requests==2.31.0
+python-dotenv==1.0.0      # for SERPAPI_API_KEY
+
+# Vector Database
+qdrant-client==1.1.3
+
+# Web App
+streamlit==1.26.0
+
+# Utilities
+uuid==1.30.0
+
+# Optional for text splitting / embeddings
+torch==2.2.0+cpu          # Needed for transformers and whisper
