@@ -1,6 +1,39 @@
+
+---
+
+## 🧠 System Architecture (Mermaid MMD Diagram)
+
 ```mermaid
 flowchart TD
-  A[User Upload] --> B{File Type}
-  B -->|PDF| C[Extract PDF]
-  B -->|Audio| D[Transcribe]
-```
+
+%% ---------- FILE INGESTION PIPELINE ----------
+
+A[📄 User Uploads File\nPDF / Audio] --> B{File Type?}
+
+B -->|PDF| C[Extract Text\n(PyMuPDF)]
+B -->|Audio| D[Transcribe Audio\n(Whisper)]
+
+C --> E[Semantic Chunking]
+D --> E[Semantic Chunking]
+
+E --> F[Embeddings\n(OpenAI / Local)]
+F --> G[Upsert to Qdrant]
+
+%% ---------- QUERY PIPELINE ----------
+
+H[💬 User Query] --> I[Retrieve Task\n(Vector Search)]
+I --> J{Confidence ≥ 0.6?}
+
+J -->|YES| K[RAG Draft Answer]
+K --> Q[Final Evaluation\nConfidence Score]
+Q --> R[(Final Answer to User)]
+
+J -->|NO| L[Improve Answer Agent]
+L --> M{Improved?}
+
+M -->|YES| Q
+
+M -->|NO| N[Web Search Fallback Agent]
+N --> O[Insert Web Results\ninto Qdrant]
+O --> I  %% re-run retrieval
+
