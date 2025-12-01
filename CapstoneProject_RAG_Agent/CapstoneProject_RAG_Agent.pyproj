@@ -52,10 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".env" />
+    <Content Include="architecture.mmd" />
     <Content Include="core\__pycache__\crew_pipeline.cpython-39.pyc" />
     <Content Include="core\__pycache__\embeddings.cpython-39.pyc" />
     <Content Include="core\__pycache__\qdrant_utils.cpython-39.pyc" />
     <Content Include="core\__pycache__\__init__.cpython-39.pyc" />
+    <Content Include="README.md" />
     <Content Include="requirements.txt" />
     <Content Include="utils\__pycache__\file_utils.cpython-39.pyc" />
     <Content Include="utils\__pycache__\prompts.cpython-39.pyc" />
