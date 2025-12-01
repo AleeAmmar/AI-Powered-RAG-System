@@ -65,24 +65,24 @@ The frontend includes:
 ---
 
 ## 🗂 Project Structure
-project/
+```project/
 │
-├── app.py # Streamlit application
+├── app.py # Streamlit application (chat UI + file upload)
 │
-├── agents/
-│ ├── extractor_agent.py # Extract, transcribe, chunk, upsert
-│ ├── search_fallback_agent.py
-│ ├── rag_agent.py
-│ ├── improver_agent.py
-│ ├── answer_agent.py
-│ ├── evaluator_agent.py
+├── agents/ # CrewAI Agents and tools
+│ ├── extractor_agent.py # Extract PDF/audio, chunk, embed, upsert to Qdrant
+│ ├── search_fallback_agent.py# Web search fallback agent
+│ ├── rag_agent.py # RAG retrieval agent
+│ ├── improver_agent.py # Answer improvement agent
+│ ├── answer_agent.py # Draft answer LLM agent
+│ ├── evaluator_agent.py # Confidence evaluation agent
 │
-├── core/
-│ ├── crew_pipeline.py
-│ ├── crew_rag_pipeline_conditional.py
-│ ├── embeddings.py
-│ ├── qdrant_utils.py
+├── core/ # Core pipeline logic and utilities
+│ ├── crew_pipeline.py # Base CrewAI task abstractions
+│ ├── crew_rag_pipeline_conditional.py # Conditional RAG Crew implementation
+│ ├── embeddings.py # Chunking & embedding functions
+│ ├── qdrant_utils.py # Qdrant upsert & query helper functions
 │
-├── config.py # Qdrant collection names
+├── config.py # Configuration (e.g., Qdrant collection name)
 │
-└── README.md
+└── README.md # Project overview, architecture, instructions```
