@@ -64,6 +64,76 @@ The frontend includes:
 
 ---
 
+## 🚀 How to Use the RAG + CrewAI System
+
+Follow these steps to set up and run the system:
+
+### 1️⃣ Setup Project Environment
+
+1. Open the project folder in **Visual Studio Code** (or your preferred IDE).
+2. Create a new **Python virtual environment** with Python 3.11:
+
+   ```bash
+   python -m venv venv
+   ```
+3. Activate the environment:
+
+   * **Windows:** `venv\Scripts\activate`
+   * **Linux / Mac:** `source venv/bin/activate`
+4. Install dependencies from `requirements.txt`:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### 2️⃣ Configure the System
+
+1. Open `config.py`.
+2. Set the following values:
+
+   * **LMStudio URL:** URL of your local LM Studio instance
+   * **Qdrant URL:** Local Qdrant server URL
+   * **LMStudio Model:** Model name you want to use (e.g., `ggml-model.bin`)
+   * **SERPAPI Key:** Your SERPAPI API key (for web search fallback)
+
+### 3️⃣ Run Supporting Services
+
+* **LM Studio:** Start your local LM Studio instance.
+* **Qdrant:** Run Qdrant locally (e.g., via Docker):
+
+  ```bash
+  docker run -p 6333:6333 qdrant/qdrant
+  ```
+
+### 4️⃣ Launch the Application
+
+Run the Streamlit app:
+
+```bash
+streamlit run app.py
+```
+
+### 5️⃣ Using the App
+
+* **Upload PDF or Audio files** to add new documents to the RAG knowledge base.
+
+* **Type your query** in the search box to retrieve answers.
+
+* The app will indicate **where the answer came from**:
+
+  * **RAG** retrieval
+  * **Improved answer**
+  * **Web search fallback**
+
+* Each answer also shows **confidence score and sources**.
+
+### ✅ Notes
+
+* Make sure **LM Studio** and **Qdrant** are running before using the app.
+* Uploaded documents are automatically **chunked, embedded, and stored in Qdrant**.
+* The system supports dynamic knowledge enrichment through **web search fallback**.
+
+
 ## 🗂 Project Structure
 ```project/
 │
