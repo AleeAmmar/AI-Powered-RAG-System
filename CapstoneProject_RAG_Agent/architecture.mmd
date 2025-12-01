@@ -1,39 +1,22 @@
+flowchart LR
+    UI[Streamlit UI - Chat and File Upload]
+    Extractor[Extractor Agent - PDF and Audio]
+    Chunk[Chunking and Embeddings]
+    Qdrant[Qdrant Vector DB]
+    Retriever[Retriever Agent]
+    Draft[Draft Answer Agent]
+    Improve[Improver Agent]
+    Web[Web Search Agent]
+    Evaluator[Evaluator Agent]
+    Final[Final Answer - Sources and Confidence]
 
----
-
-## 🧠 System Architecture (Mermaid MMD Diagram)
-
-```mermaid
-flowchart TD
-
-%% ---------- FILE INGESTION PIPELINE ----------
-
-A[📄 User Uploads File\nPDF / Audio] --> B{File Type?}
-
-B -->|PDF| C[Extract Text\n(PyMuPDF)]
-B -->|Audio| D[Transcribe Audio\n(Whisper)]
-
-C --> E[Semantic Chunking]
-D --> E[Semantic Chunking]
-
-E --> F[Embeddings\n(OpenAI / Local)]
-F --> G[Upsert to Qdrant]
-
-%% ---------- QUERY PIPELINE ----------
-
-H[💬 User Query] --> I[Retrieve Task\n(Vector Search)]
-I --> J{Confidence ≥ 0.6?}
-
-J -->|YES| K[RAG Draft Answer]
-K --> Q[Final Evaluation\nConfidence Score]
-Q --> R[(Final Answer to User)]
-
-J -->|NO| L[Improve Answer Agent]
-L --> M{Improved?}
-
-M -->|YES| Q
-
-M -->|NO| N[Web Search Fallback Agent]
-N --> O[Insert Web Results\ninto Qdrant]
-O --> I  %% re-run retrieval
-
+    UI --> Extractor
+    Extractor --> Chunk
+    Chunk --> Qdrant
+    Qdrant --> Retriever
+    Retriever --> Draft
+    Draft --> Improve
+    Improve --> Evaluator
+    Evaluator --> Final
+    Improve --> Web
+    Web --> Qdrant
